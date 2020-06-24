@@ -162,7 +162,9 @@ class EditState extends State<EditProfile> {
                                         maxHeight: 200,
                                       ),
                                       child: Image.network(
-                                        'http://192.168.1.5/controlModel/images/member/' +
+                                        'http://' +
+                                            Service.ip +
+                                            '/controlModel/images/member/' +
                                             member[0].mImage,
                                         fit: BoxFit.fitWidth,
                                       ),

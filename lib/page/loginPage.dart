@@ -4,7 +4,9 @@ import 'package:bustracking_project/model/busschedule_model.dart';
 import 'package:bustracking_project/model/busstop_model.dart';
 import 'package:bustracking_project/model/comment_model.dart';
 import 'package:bustracking_project/model/member_model.dart';
+import 'package:bustracking_project/page/googleMap.dart';
 import 'package:bustracking_project/service/service.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:bustracking_project/page/home.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +26,7 @@ class _LogingPageState extends State<LogingPage> {
   bool _isLoading = false;
   var status = {};
   bool pass = false;
+  BitmapDescriptor _markerIcon;
 
   void _toggleVisibility() {
     setState(() {
@@ -34,6 +37,18 @@ class _LogingPageState extends State<LogingPage> {
   @override
   void initState() {
     super.initState();
+    _createMarkerImageFromAsset(context);
+  }
+
+  Future _createMarkerImageFromAsset(BuildContext context) async {
+    if (_markerIcon == null) {
+      ImageConfiguration configuration = ImageConfiguration();
+      BitmapDescriptor bmpd = await BitmapDescriptor.fromAssetImage(
+          configuration, 'asset/icons/placeholder.png');
+      setState(() {
+        _markerIcon = bmpd;
+      });
+    }
   }
 
   Future<List<BusstopModel>> getDataBusstop() async {
@@ -46,6 +61,7 @@ class _LogingPageState extends State<LogingPage> {
         headers: {HttpHeaders.contentTypeHeader: 'application/json'});
     List jsonData = json.decode(response.body);
     HomePage.busstop = jsonData.map((i) => BusstopModel.fromJson(i)).toList();
+    _createMarker();
   }
 
   Future<List<CommentModel>> getDataComment() async {
@@ -73,7 +89,8 @@ class _LogingPageState extends State<LogingPage> {
         headers: {HttpHeaders.contentTypeHeader: 'application/json'});
     print(response.statusCode.toString() + ' ' + response.body.toString());
     List jsonData = json.decode(response.body);
-    HomePage.busschedule = jsonData.map((i) => BusscheduleModel.fromJson(i)).toList();
+    HomePage.busschedule =
+        jsonData.map((i) => BusscheduleModel.fromJson(i)).toList();
   }
 
   Future _login() async {
@@ -97,10 +114,10 @@ class _LogingPageState extends State<LogingPage> {
               duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
         });
       } else {
+        var getBus = await getDataBusstop();
+        getDataComment();
+        getDataBusSchedule();
         setState(() {
-          getDataBusstop();
-          getDataComment();
-          getDataBusSchedule();
           Navigator.push(
               context,
               MaterialPageRoute(
@@ -228,5 +245,19 @@ class _LogingPageState extends State<LogingPage> {
             obscureText: hintText == "รหัสผ่าน" ? _isHidden : false,
           ),
         ));
+  }
+
+  void _createMarker() {
+    for (int i = 0; i < HomePage.busstop.length; i++) {
+      print('i > ' + i.toString());
+      MapPage.markers.add(Marker(
+          icon: _markerIcon,
+          markerId: MarkerId(i.toString()),
+          position: LatLng(double.parse(HomePage.busstop[i].sLatitude),
+              double.parse(HomePage.busstop[i].sLongitude)),
+          infoWindow: InfoWindow(
+            title: HomePage.busstop[i].sName,
+          )));
+    }
   }
 }
