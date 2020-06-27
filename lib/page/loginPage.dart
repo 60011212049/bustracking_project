@@ -205,7 +205,7 @@ class _LogingPageState extends State<LogingPage> {
               ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Center(child: Text('2020 \u00a9 Thanapol Boonprakom')),
+                child: Center(child: Text('2020 \u00a9 BusTracking Project')),
               ),
             ],
           ),
