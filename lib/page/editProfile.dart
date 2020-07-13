@@ -141,43 +141,56 @@ class EditState extends State<EditProfile> {
                 child: Column(
                   children: <Widget>[
                     Container(
-                      width: 200,
-                      child: Column(
+                      height: 230,
+                      width: 320,
+                      child: Wrap(
                         children: <Widget>[
-                          (image != null)
-                              ? ConstrainedBox(
-                                  constraints: BoxConstraints(
-                                    maxWidth: 300,
-                                    maxHeight: 200,
-                                  ),
-                                  child: Image.file(
-                                    image,
-                                    fit: BoxFit.fitWidth,
-                                  ),
-                                )
-                              : (member[0].mImage != '')
-                                  ? ConstrainedBox(
-                                      constraints: BoxConstraints(
-                                        maxWidth: 300,
-                                        maxHeight: 200,
-                                      ),
-                                      child: Image.network(
-                                        'http://' +
-                                            Service.ip +
-                                            '/controlModel/images/member/' +
-                                            member[0].mImage,
-                                        fit: BoxFit.fitWidth,
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              (image != null)
+                                  ? Center(
+                                      child: ConstrainedBox(
+                                        constraints: BoxConstraints(
+                                          maxWidth: 300,
+                                          maxHeight: 200,
+                                        ),
+                                        child: Image.file(
+                                          image,
+                                          fit: BoxFit.fitWidth,
+                                        ),
                                       ),
                                     )
-                                  : Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          5, 10, 5, 10),
-                                      child: CircleAvatar(
-                                        backgroundImage: ExactAssetImage(
-                                            'asset/icons/student.png'),
-                                        radius: 110,
-                                      ),
-                                    )
+                                  : (member[0].mImage != '')
+                                      ? Center(
+                                          child: ConstrainedBox(
+                                            constraints: BoxConstraints(
+                                              maxWidth: 300,
+                                              maxHeight: 200,
+                                            ),
+                                            child: Image.network(
+                                              'http://' +
+                                                  Service.ip +
+                                                  '/controlModel/images/member/' +
+                                                  member[0].mImage,
+                                              fit: BoxFit.fitWidth,
+                                            ),
+                                          ),
+                                        )
+                                      : Center(
+                                          child: Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                5, 10, 5, 10),
+                                            child: CircleAvatar(
+                                              backgroundImage: ExactAssetImage(
+                                                  'asset/icons/student.png'),
+                                              radius: 110,
+                                            ),
+                                          ),
+                                        )
+                            ],
+                          ),
                         ],
                       ),
                     ),

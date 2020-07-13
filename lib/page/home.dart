@@ -1,9 +1,14 @@
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:bustracking_project/bottomPage/addComment.dart';
 import 'package:bustracking_project/bottomPage/busschedule_page.dart';
 import 'package:bustracking_project/bottomPage/busstop_page.dart';
 import 'package:bustracking_project/bottomPage/comment_page.dart';
 import 'package:bustracking_project/custom_icons.dart';
 import 'package:bustracking_project/custom_new_icons.dart';
+import 'package:bustracking_project/model/busposition_model.dart';
 import 'package:bustracking_project/model/busschedule_model.dart';
 import 'package:bustracking_project/model/busstop_model.dart';
 import 'package:bustracking_project/model/comment_model.dart';
@@ -11,6 +16,7 @@ import 'package:bustracking_project/model/member_model.dart';
 import 'package:bustracking_project/page/editProfile.dart';
 import 'package:bustracking_project/page/googleMap.dart';
 import 'package:bustracking_project/page/loginPage.dart';
+import 'package:bustracking_project/service/service.dart';
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -36,6 +42,8 @@ class _HomePageState extends State<HomePage>
   _HomePageState(List<MemberModel> res) {
     member = res;
   }
+
+  List<BusPositionModel> busPos = List<BusPositionModel>();
   //* Set Tab BottomNavigator *//
   TabController _tabController;
   final _tabList = [
@@ -53,10 +61,23 @@ class _HomePageState extends State<HomePage>
     ),
   ];
 
+  Future<void> getBusLocation() async {
+    status['status'] = 'show';
+    status['id'] = '';
+    String jsonSt = json.encode(status);
+    var response = await http.post(
+        'http://' + Service.ip + '/controlModel/buspossition_model.php',
+        body: jsonSt,
+        headers: {HttpHeaders.contentTypeHeader: 'application/json'});
+    List jsonData = json.decode(response.body);
+    busPos = jsonData.map((i) => BusPositionModel.fromJson(i)).toList();
+  }
+
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: _tabList.length, vsync: this);
+    Timer.periodic(Duration(seconds: 1), (timer) {});
   }
 
   @override
