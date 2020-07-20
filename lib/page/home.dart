@@ -13,6 +13,7 @@ import 'package:bustracking_project/model/busschedule_model.dart';
 import 'package:bustracking_project/model/busstop_model.dart';
 import 'package:bustracking_project/model/comment_model.dart';
 import 'package:bustracking_project/model/member_model.dart';
+import 'package:bustracking_project/page/assessment_page.dart';
 import 'package:bustracking_project/page/editProfile.dart';
 import 'package:bustracking_project/page/googleMap.dart';
 import 'package:bustracking_project/page/loginPage.dart';
@@ -274,6 +275,12 @@ class _HomePageState extends State<HomePage>
             ),
             onTap: () {
               Navigator.of(context).pop();
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AssessmentFormPage(),
+                ),
+              );
             },
           ),
           ListTile(

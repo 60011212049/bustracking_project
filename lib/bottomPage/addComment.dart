@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:bustracking_project/model/comment_model.dart';
 import 'package:bustracking_project/model/statusModel.dart';
 import 'package:bustracking_project/page/home.dart';
+import 'package:bustracking_project/service/service.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -30,13 +31,12 @@ class _AddCommentState extends State<AddComment> {
     String jsonSt = json.encode(status);
     print(jsonSt);
     var response = await http.post(
-        'https://busprojectth.000webhostapp.com/comment_model.php',
+        'http://' + Service.ip + '/controlModel/comment_model.php',
         body: jsonSt,
         headers: {HttpHeaders.contentTypeHeader: 'application/json'});
     print(response.statusCode.toString() + ' ' + response.body.toString());
     if (response.statusCode == 200) {
-      statuss = StatusCodeMember.fromJson(json.decode(response.body));
-      if (statuss.toString() == 'Bad') {
+      if (response.body.toString() == 'Bad') {
         setState(() {
           AddComment().createState();
           Toast.show("เพิ่มไม่สำเร็จ", context,
