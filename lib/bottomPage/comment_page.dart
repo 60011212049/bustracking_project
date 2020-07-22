@@ -14,7 +14,7 @@ class CommentPage extends StatefulWidget {
 }
 
 class _CommentPageState extends State<CommentPage> {
-  double rat=0;
+  double rat = 0;
   List<CommentModel> comment;
   @override
   void initState() {
@@ -28,10 +28,10 @@ class _CommentPageState extends State<CommentPage> {
     double x = 0;
     for (var i = 0; i < comment.length; i++) {
       rat = rat + double.parse(comment[i].rPoint.toString());
-      print('> '+comment[i].rPoint.toString());
+      print('> ' + comment[i].rPoint.toString());
       x = x + 1;
     }
-    print('number > '+rat.toString());
+    print('number > ' + rat.toString());
     rat = double.parse((rat / x).toStringAsFixed(1));
     print('Sum : ' + rat.toString() + ' i : ' + x.toString());
   }
@@ -112,51 +112,57 @@ class _CommentPageState extends State<CommentPage> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(3, 5, 3, 5),
                         child: Container(
-                            child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                            child: Column(
                           children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 8, 2, 0),
-                              child: CircleAvatar(
-                                backgroundColor: Colors.yellow[700],
-                                radius: 22,
-                                child: Text('user'),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    comment[i].rName,
-                                    style: TextStyle(fontSize: 20),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 8, 2, 0),
+                                  child: CircleAvatar(
+                                    backgroundColor: Colors.yellow[700],
+                                    radius: 22,
+                                    child: Text('user'),
                                   ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 0, 0, 5),
-                                    child: RatingBarIndicator(
-                                      rating: double.parse(
-                                          comment[i].rPoint.toString()),
-                                      itemBuilder: (context, index) => Icon(
-                                        Icons.star,
-                                        color: Colors.amber,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        comment[i].rName,
+                                        style: TextStyle(fontSize: 20),
                                       ),
-                                      itemCount: 5,
-                                      itemSize: 18.0,
-                                      unratedColor: Colors.grey[300],
-                                    ),
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            0, 0, 0, 5),
+                                        child: RatingBarIndicator(
+                                          rating: double.parse(
+                                              comment[i].rPoint.toString()),
+                                          itemBuilder: (context, index) => Icon(
+                                            Icons.star,
+                                            color: Colors.amber,
+                                          ),
+                                          itemCount: 5,
+                                          itemSize: 18.0,
+                                          unratedColor: Colors.grey[300],
+                                        ),
+                                      ),
+                                      Container(
+                                        width: 310,
+                                        child: Text(
+                                          comment[i].rDetail,
+                                          style: TextStyle(fontSize: 18),
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                  Container(
-                                    width: 310,
-                                    child: Text(
-                                      comment[i].rDetail,
-                                      style: TextStyle(fontSize: 18),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            )
+                                )
+                              ],
+                            ),
                           ],
                         )),
                       )
@@ -171,4 +177,3 @@ class _CommentPageState extends State<CommentPage> {
     );
   }
 }
-

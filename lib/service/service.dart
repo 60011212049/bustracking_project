@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:bustracking_project/model/member_model.dart';
 
 class Service {
-  static const String ip = '192.168.1.4';
+  static const String ip = '192.168.1.5';
   var status = {};
   List<MemberModel> member;
   String idx;
