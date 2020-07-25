@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:bustracking_project/model/member_model.dart';
 
 class Service {
-  static const String ip = '192.168.1.5';
+  static const String ip = '192.168.1.4';
   var status = {};
   List<MemberModel> member;
   String idx;
@@ -21,7 +21,7 @@ class Service {
     getDataMember(id);
   }
 
-  Future<List<BusstopModel>> getDataBusstop() async {
+  Future<Null> getDataBusstop() async {
     status['status'] = 'show';
     status['id'] = '';
     String jsonSt = json.encode(status);
@@ -33,7 +33,7 @@ class Service {
     HomePage.busstop = jsonData.map((i) => BusstopModel.fromJson(i)).toList();
   }
 
-  Future<List<CommentModel>> getDataComment() async {
+  Future<Null> getDataComment() async {
     status['status'] = 'show';
     status['id'] = '';
     String jsonSt = json.encode(status);
@@ -47,7 +47,7 @@ class Service {
     HomePage.comment = jsonData.map((i) => CommentModel.fromJson(i)).toList();
   }
 
-  Future<List<MemberModel>> getDataMember(id) async {
+  Future<Null> getDataMember(id) async {
     status['status'] = 'showId';
     status['id'] = id;
     String jsonSt = json.encode(status);

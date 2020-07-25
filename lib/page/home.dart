@@ -78,7 +78,6 @@ class _HomePageState extends State<HomePage>
   void initState() {
     super.initState();
     _tabController = TabController(length: _tabList.length, vsync: this);
-    Timer.periodic(Duration(seconds: 1), (timer) {});
   }
 
   @override
