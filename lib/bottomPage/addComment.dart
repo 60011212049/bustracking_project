@@ -20,16 +20,14 @@ class _AddCommentState extends State<AddComment> {
   var _detailcontroller = TextEditingController();
   StatusCodeMember statuss;
 
-  Future<List<CommentModel>> _sentDataComment() async {
+  Future sentDataComment() async {
     var status = {};
     status['status'] = 'add';
-    status['id'] = HomePage.mem[0].mid;
     status['name'] = _namecontroller.text;
     status['detail'] = _detailcontroller.text;
     status['point'] = ratingTrue.toString();
     status['image'] = '';
     String jsonSt = json.encode(status);
-    print(jsonSt);
     var response = await http.post(
         'http://' + Service.ip + '/controlModel/comment_model.php',
         body: jsonSt,
@@ -38,24 +36,18 @@ class _AddCommentState extends State<AddComment> {
     if (response.statusCode == 200) {
       if (response.body.toString() == 'Bad') {
         setState(() {
-          AddComment().createState();
           Toast.show("เพิ่มไม่สำเร็จ", context,
               duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
         });
-        print("Login Fail");
       } else {
         Toast.show("เพิ่มรีวิวสำเร็จ", context,
             duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-        print('add Success !');
         setState(() {
           Navigator.pop(context);
         });
       }
     } else {
-      setState(() {
-        //_isLoading = false;
-        //Navigator.pop(context);
-      });
+      setState(() {});
     }
   }
 
@@ -179,8 +171,7 @@ class _AddCommentState extends State<AddComment> {
                               print(_detailcontroller.text);
 
                               setState(() {
-                                // _isLoading = false;
-                                _sentDataComment();
+                                sentDataComment();
                               });
                             },
                           ),

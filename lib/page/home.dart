@@ -16,40 +16,32 @@ import 'package:bustracking_project/model/member_model.dart';
 import 'package:bustracking_project/page/assessment_page.dart';
 import 'package:bustracking_project/page/editProfile.dart';
 import 'package:bustracking_project/page/googleMap.dart';
-import 'package:bustracking_project/page/loginPage.dart';
 import 'package:bustracking_project/service/service.dart';
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
-  static List<MemberModel> mem;
-  static List<BusstopModel> busstop;
-  static List<CommentModel> comment;
-  static List<BusscheduleModel> busschedule;
-  HomePage.sent(List<MemberModel> result) {
-    mem = result;
-  }
-  HomePage();
   @override
-  _HomePageState createState() => _HomePageState(mem);
+  _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
+  //* Local Variable *//
+  List<MemberModel> mem;
+  BitmapDescriptor markerIcon;
   List<MemberModel> member;
   var status = {};
   int selectedIndex = 0;
-  _HomePageState(List<MemberModel> res) {
-    member = res;
-  }
-
   List<BusPositionModel> busPos = List<BusPositionModel>();
+
   //* Set Tab BottomNavigator *//
   TabController _tabController;
   final _tabList = [
     Container(
-      child: Container(child: MapPage()),
+      child: MapPage(),
     ),
     Container(
       child: BusStopPage(),
@@ -130,48 +122,6 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  // ***** BottomBarNavgator Menu ****** //
-  FFNavigationBar bottomBar() {
-    return FFNavigationBar(
-      theme: FFNavigationBarTheme(
-        barBackgroundColor: Colors.white,
-        selectedItemBorderColor: Color(0xFF3a3a3a),
-        selectedItemBackgroundColor: Colors.yellow[700],
-        selectedItemIconColor: Color(0xFF3a3a3a),
-        selectedItemLabelColor: Color(0xFF3a3a3a),
-        unselectedItemTextStyle: TextStyle(fontSize: 15.0),
-        selectedItemTextStyle: TextStyle(fontSize: 17.0),
-      ),
-      selectedIndex: selectedIndex,
-      onSelectTab: (index) {
-        setState(() {
-          selectedIndex = index;
-          print('select index : ' + selectedIndex.toString());
-          _tabController.animateTo(selectedIndex);
-          // _changeIndex(index);
-        });
-      },
-      items: [
-        FFNavigationBarItem(
-          iconData: Icons2.map_for,
-          label: 'แผนที่',
-        ),
-        FFNavigationBarItem(
-          iconData: Icons1.location_5,
-          label: 'จุดรับส่ง',
-        ),
-        FFNavigationBarItem(
-          iconData: Icons1.directions_bus,
-          label: 'ตารางเดินรถ',
-        ),
-        FFNavigationBarItem(
-          iconData: Icons1.comment_5,
-          label: 'ความคิดเห็น',
-        ),
-      ],
-    );
-  }
-
   // ***** Drawwer Menu ****** //
   Drawer drawwerMenu() {
     return Drawer(
@@ -180,16 +130,12 @@ class _HomePageState extends State<HomePage>
           UserAccountsDrawerHeader(
             currentAccountPicture: ClipOval(
               child: Container(
-                child: (member[0].mImage != '')
-                    ? Image.network(
-                        'http://192.168.1.5/controlModel/images/member/' +
-                            member[0].mImage)
-                    : Image.asset("asset/icons/student.png"),
+                child: Image.asset("asset/icons/student.png"),
                 color: Colors.white,
               ),
             ),
-            accountEmail: Text(member[0].mEmail),
-            accountName: Text(member[0].mName),
+            accountEmail: Text('member[0].mEmail'),
+            accountName: Text('member[0].mName'),
           ),
           ListTile(
             title: Text(
@@ -295,43 +241,6 @@ class _HomePageState extends State<HomePage>
               Navigator.of(context).pop();
             },
           ),
-          ListTile(
-            title: Text('ตั้งค่าโปรไฟล์',
-                style: TextStyle(
-                  fontSize: 18.0,
-                )),
-            trailing: Image.asset(
-              "asset/icons/settings.png",
-              width: 25,
-            ),
-            onTap: () {
-              Navigator.of(context).pop();
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => EditProfile(),
-                ),
-              ).then((value) {
-                setState(() {});
-              });
-            },
-          ),
-          ListTile(
-            title: Text('ออกจากระบบ',
-                style: TextStyle(
-                  fontSize: 18.0,
-                )),
-            trailing: Image.asset(
-              "asset/icons/logout.png",
-              width: 25,
-            ),
-            onTap: () async {
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => LogingPage()),
-                  (Route<dynamic> route) => false);
-            },
-          ),
           Divider(),
           ListTile(
             title: Text('ปิดเมนู',
@@ -343,6 +252,48 @@ class _HomePageState extends State<HomePage>
           ),
         ],
       ),
+    );
+  }
+
+  // ***** BottomBarNavgator Menu ****** //
+  FFNavigationBar bottomBar() {
+    return FFNavigationBar(
+      theme: FFNavigationBarTheme(
+        barBackgroundColor: Colors.white,
+        selectedItemBorderColor: Color(0xFF3a3a3a),
+        selectedItemBackgroundColor: Colors.yellow[700],
+        selectedItemIconColor: Color(0xFF3a3a3a),
+        selectedItemLabelColor: Color(0xFF3a3a3a),
+        unselectedItemTextStyle: TextStyle(fontSize: 15.0),
+        selectedItemTextStyle: TextStyle(fontSize: 17.0),
+      ),
+      selectedIndex: selectedIndex,
+      onSelectTab: (index) {
+        setState(() {
+          selectedIndex = index;
+          print('select index : ' + selectedIndex.toString());
+          _tabController.animateTo(selectedIndex);
+          // _changeIndex(index);
+        });
+      },
+      items: [
+        FFNavigationBarItem(
+          iconData: Icons2.map_for,
+          label: 'แผนที่',
+        ),
+        FFNavigationBarItem(
+          iconData: Icons1.location_5,
+          label: 'จุดรับส่ง',
+        ),
+        FFNavigationBarItem(
+          iconData: Icons1.directions_bus,
+          label: 'ตารางเดินรถ',
+        ),
+        FFNavigationBarItem(
+          iconData: Icons1.comment_5,
+          label: 'ความคิดเห็น',
+        ),
+      ],
     );
   }
 }

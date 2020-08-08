@@ -19,6 +19,7 @@ class BusPositionModel {
     this.latitude,
     this.cDate,
     this.cTime,
+    this.sid,
   });
 
   String pid;
@@ -27,6 +28,7 @@ class BusPositionModel {
   String latitude;
   String cDate;
   String cTime;
+  String sid;
 
   factory BusPositionModel.fromJson(Map<String, dynamic> json) =>
       BusPositionModel(
@@ -36,6 +38,7 @@ class BusPositionModel {
         latitude: json["latitude"],
         cDate: json["c_date"],
         cTime: json["c_time"],
+        sid: json["sid"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -45,5 +48,6 @@ class BusPositionModel {
         "latitude": latitude,
         "c_date": cDate,
         "c_time": cTime,
+        "sid": sid,
       };
 }

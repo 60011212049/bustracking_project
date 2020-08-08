@@ -1,7 +1,9 @@
 import 'package:bustracking_project/page/home.dart';
-import 'package:bustracking_project/page/loginPage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 void main() {
   runApp(MyApp());
 }
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Quark',
         primaryColor: Colors.yellow[700],
       ),
-      home: LogingPage(),
+      home: HomePage(),
     );
   }
 }
