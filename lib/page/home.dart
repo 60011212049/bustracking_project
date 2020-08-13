@@ -102,7 +102,7 @@ class _HomePageState extends State<HomePage>
           Container(
             width: 10,
           ),
-          Text('Bus tracking'),
+          Text('Bus GPS tracking'),
         ],
       ),
       actions: <Widget>[
@@ -134,8 +134,10 @@ class _HomePageState extends State<HomePage>
                 color: Colors.white,
               ),
             ),
-            accountEmail: Text('member[0].mEmail'),
-            accountName: Text('member[0].mName'),
+            accountEmail: Text(
+              'MSU Bus GPS Tracking',
+              style: TextStyle(fontSize: 21),
+            ),
           ),
           ListTile(
             title: Text(

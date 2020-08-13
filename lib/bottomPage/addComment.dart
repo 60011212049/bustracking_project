@@ -111,6 +111,7 @@ class _AddCommentState extends State<AddComment> {
                       maxLength: 20,
                       style: TextStyle(fontSize: 22.0),
                       decoration: InputDecoration(
+                        labelText: 'ชื่อเล่น',
                         filled: true,
                         fillColor: Colors.white,
                         hintText: 'ชื่อเล่น',

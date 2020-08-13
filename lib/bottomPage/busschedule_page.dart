@@ -5,6 +5,7 @@ import 'package:bustracking_project/model/busschedule_model.dart';
 import 'package:bustracking_project/page/home.dart';
 import 'package:bustracking_project/service/service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
 
 class BusSchedule extends StatefulWidget {
@@ -16,9 +17,11 @@ class _BusScheduleState extends State<BusSchedule> {
   List<BusscheduleModel> busData;
   bool _isloading = false;
   List<DataRow> rowlist;
+  int i = 0;
   @override
   void initState() {
     super.initState();
+    this.i = 0;
     getDataBusSchedule();
   }
 
@@ -35,7 +38,12 @@ class _BusScheduleState extends State<BusSchedule> {
     List jsonData = json.decode(response.body);
     busData = jsonData.map((i) => BusscheduleModel.fromJson(i)).toList();
     _isloading = true;
+    this.i = 0;
     setState(() {});
+  }
+
+  int countRount() {
+    return i = i + 1;
   }
 
   @override
@@ -77,9 +85,42 @@ class _BusScheduleState extends State<BusSchedule> {
                     rows: busData
                         .map((data) => DataRow(
                               cells: [
-                                DataCell(textRow(data.tCid)),
-                                DataCell(textRow(data.tcTime)),
-                                DataCell(textRow(data.cid)),
+                                DataCell(
+                                  Container(
+                                    width: 50,
+                                    child: Text(
+                                      countRount().toString(),
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontFamily: 'Quark',
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                DataCell(
+                                  Container(
+                                    width: 80,
+                                    child: Text(
+                                      data.tcTime,
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontFamily: 'Quark',
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                DataCell(
+                                  Container(
+                                    width: 150,
+                                    child: Text(
+                                      data.cid,
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontFamily: 'Quark',
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ],
                             ))
                         .toList(),

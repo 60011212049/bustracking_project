@@ -35,9 +35,7 @@ class _CommentPageState extends State<CommentPage> {
     setState(() {});
   }
 
-  Future<Null> refreshList() async {
-    //await Future.delayed(Duration(seconds: 2));
-    print('Refresh list');
+  Future refreshList() async {
     var status = {};
     status['status'] = 'show';
     status['id'] = '';
@@ -46,13 +44,11 @@ class _CommentPageState extends State<CommentPage> {
         'http://' + Service.ip + '/controlModel/comment_model.php',
         body: jsonSt,
         headers: {HttpHeaders.contentTypeHeader: 'application/json'});
-    print(response.statusCode.toString() + ' ' + response.body.toString());
     List jsonData = json.decode(response.body);
     this.comment = jsonData.map((i) => CommentModel.fromJson(i)).toList();
     setState(() {
       calRating();
     });
-    return null;
   }
 
   Future getDataComment() async {
@@ -86,7 +82,7 @@ class _CommentPageState extends State<CommentPage> {
                             padding: const EdgeInsets.fromLTRB(5, 10, 0, 0),
                             child: Text(
                               'คะแนนการรีวิวการใช้งาน',
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(fontSize: 22),
                             ),
                           ),
                           Row(
@@ -127,57 +123,67 @@ class _CommentPageState extends State<CommentPage> {
                               child: Container(
                                   child: Column(
                                 children: <Widget>[
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            0, 8, 2, 0),
-                                        child: CircleAvatar(
-                                          backgroundColor: Colors.yellow[700],
-                                          radius: 22,
-                                          child: Text('user'),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            Text(
-                                              comment[i].rName,
-                                              style: TextStyle(fontSize: 20),
+                                  Wrap(
+                                    children: [
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                0, 8, 2, 0),
+                                            child: CircleAvatar(
+                                              backgroundColor:
+                                                  Colors.yellow[700],
+                                              radius: 22,
+                                              child: Text('user'),
                                             ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.fromLTRB(
-                                                      0, 0, 0, 5),
-                                              child: RatingBarIndicator(
-                                                rating: double.parse(comment[i]
-                                                    .rPoint
-                                                    .toString()),
-                                                itemBuilder: (context, index) =>
-                                                    Icon(
-                                                  Icons.star,
-                                                  color: Colors.amber,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Text(
+                                                  comment[i].rName,
+                                                  style:
+                                                      TextStyle(fontSize: 20),
                                                 ),
-                                                itemCount: 5,
-                                                itemSize: 18.0,
-                                                unratedColor: Colors.grey[300],
-                                              ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.fromLTRB(
+                                                          0, 0, 0, 5),
+                                                  child: RatingBarIndicator(
+                                                    rating: double.parse(
+                                                        comment[i]
+                                                            .rPoint
+                                                            .toString()),
+                                                    itemBuilder:
+                                                        (context, index) =>
+                                                            Icon(
+                                                      Icons.star,
+                                                      color: Colors.amber,
+                                                    ),
+                                                    itemCount: 5,
+                                                    itemSize: 18.0,
+                                                    unratedColor:
+                                                        Colors.grey[300],
+                                                  ),
+                                                ),
+                                                Container(
+                                                  width: 310,
+                                                  child: Text(
+                                                    comment[i].rDetail,
+                                                    style:
+                                                        TextStyle(fontSize: 18),
+                                                  ),
+                                                )
+                                              ],
                                             ),
-                                            Container(
-                                              width: 310,
-                                              child: Text(
-                                                comment[i].rDetail,
-                                                style: TextStyle(fontSize: 18),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      )
+                                          )
+                                        ],
+                                      ),
                                     ],
                                   ),
                                 ],
