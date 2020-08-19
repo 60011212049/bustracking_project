@@ -39,7 +39,7 @@ dependencies:
   path_provider:
   flutter_local_notifications:
   characters: ^1.0.0
-  flutter_screenutil: ^2.3.0
+  intl: ^0.16.1
 
 dev_dependencies:
   flutter_test:

@@ -5,7 +5,6 @@ import 'package:bustracking_project/model/busschedule_model.dart';
 import 'package:bustracking_project/page/home.dart';
 import 'package:bustracking_project/service/service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
 
 class BusSchedule extends StatefulWidget {
@@ -62,9 +61,42 @@ class _BusScheduleState extends State<BusSchedule> {
                   ], rows: [
                     DataRow(
                       cells: [
-                        DataCell(textRow('')),
-                        DataCell(textRow('')),
-                        DataCell(textRow('')),
+                        DataCell(
+                          Container(
+                            width: 50,
+                            child: Text(
+                              '',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: 'Quark',
+                              ),
+                            ),
+                          ),
+                        ),
+                        DataCell(
+                          Container(
+                            width: 80,
+                            child: Text(
+                              '',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: 'Quark',
+                              ),
+                            ),
+                          ),
+                        ),
+                        DataCell(
+                          Container(
+                            width: 150,
+                            child: Text(
+                              '',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: 'Quark',
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     )
                   ]),

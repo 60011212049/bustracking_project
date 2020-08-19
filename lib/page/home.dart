@@ -14,7 +14,7 @@ import 'package:bustracking_project/model/busstop_model.dart';
 import 'package:bustracking_project/model/comment_model.dart';
 import 'package:bustracking_project/model/member_model.dart';
 import 'package:bustracking_project/page/assessment_page.dart';
-import 'package:bustracking_project/page/editProfile.dart';
+import 'package:bustracking_project/page/busroute.dart';
 import 'package:bustracking_project/page/googleMap.dart';
 import 'package:bustracking_project/service/service.dart';
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
@@ -134,10 +134,11 @@ class _HomePageState extends State<HomePage>
                 color: Colors.white,
               ),
             ),
-            accountEmail: Text(
+            accountName: Text(
               'MSU Bus GPS Tracking',
               style: TextStyle(fontSize: 21),
             ),
+            accountEmail: null,
           ),
           ListTile(
             title: Text(
@@ -297,27 +298,5 @@ class _HomePageState extends State<HomePage>
         ),
       ],
     );
-  }
-}
-
-class BusRoute extends StatelessWidget {
-  @override
-  Widget build(BuildContext buildContext) {
-    return new Scaffold(
-        appBar: new AppBar(
-          title: new Text(
-            "แผนที่การเดินรถ",
-            textScaleFactor: 1.2,
-          ),
-        ),
-        body: Container(
-          child: ListView(
-            children: <Widget>[
-              Expanded(
-                child: Image.asset('asset/images/bus_route.jpg'),
-              )
-            ],
-          ),
-        ));
   }
 }

@@ -291,11 +291,27 @@ class DetailState extends State<Detail> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: Center(
-                            child: Image.asset(
-                              'asset/backgrounds/msu_pic.JPG',
-                              fit: BoxFit.cover,
-                              width: 300,
-                            ),
+                            child: busstop[id].sImage == ''
+                                ? Image.asset(
+                                    'asset/backgrounds/msu_pic.JPG',
+                                    fit: BoxFit.cover,
+                                    width: 300,
+                                  )
+                                : Center(
+                                    child: ConstrainedBox(
+                                      constraints: BoxConstraints(
+                                        maxWidth: 300,
+                                        maxHeight: 200,
+                                      ),
+                                      child: Image.network(
+                                        'http://' +
+                                            Service.ip +
+                                            '/controlModel/showImage.php?name=' +
+                                            busstop[id].sImage,
+                                        fit: BoxFit.fitWidth,
+                                      ),
+                                    ),
+                                  ),
                           ),
                         ),
                       ),

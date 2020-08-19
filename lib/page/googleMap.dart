@@ -90,7 +90,7 @@ class _MapState extends State<MapPage> {
   }
 
   void updatePinOnMap() async {
-    print('update map ' + timer.tick.toString());
+    // print('update map ' + timer.tick.toString());
     setState(() {
       double lat = 0, long = 0;
       for (int i = 0; i < busPos.length; i++) {
