@@ -15,6 +15,7 @@ import 'package:bustracking_project/model/comment_model.dart';
 import 'package:bustracking_project/model/member_model.dart';
 import 'package:bustracking_project/page/assessment_page.dart';
 import 'package:bustracking_project/page/busroute.dart';
+import 'package:bustracking_project/page/contact.dart';
 import 'package:bustracking_project/page/googleMap.dart';
 import 'package:bustracking_project/service/service.dart';
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
@@ -242,6 +243,12 @@ class _HomePageState extends State<HomePage>
             ),
             onTap: () {
               Navigator.of(context).pop();
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Contact(),
+                ),
+              );
             },
           ),
           Divider(),
