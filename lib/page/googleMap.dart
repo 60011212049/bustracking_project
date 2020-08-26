@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:bustracking_project/bottomPage/busstop_page.dart';
 import 'package:bustracking_project/model/busposition_model.dart';
 import 'package:bustracking_project/model/busstop_model.dart';
+import 'package:bustracking_project/page/datailbusstop.dart';
 import 'package:bustracking_project/page/home.dart';
 import 'package:bustracking_project/service/service.dart';
 import 'package:flutter/material.dart';
@@ -142,8 +144,8 @@ class _MapState extends State<MapPage> {
                 onTap: () {
                   showDialog(
                     context: context,
-                    child: new SimpleDialog(
-                      title: new Text('กรุณาเลือกรถราง'),
+                    child: SimpleDialog(
+                      title: DetailBus(busstop, i),
                     ),
                   );
                 },
