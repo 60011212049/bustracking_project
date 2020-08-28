@@ -37,7 +37,7 @@ class _AssessmentFormPageState extends State<AssessmentFormPage> {
   @override
   void initState() {
     super.initState();
-    getDataQuest();
+    //getDataQuest();
   }
 
   Future getDataQuest() async {
@@ -228,202 +228,185 @@ class _AssessmentFormPageState extends State<AssessmentFormPage> {
                   'แบบสอบถาม',
                   style: TextStyle(fontSize: 26),
                 ),
-                loading != true
-                    ? Container()
-                    : Column(
-                        children: [
-                          Card(
-                            child: ListTile(
-                              title: Text(
-                                'แอปพลิเคชั่นใช้งานง่าย สะดวก ไม่มีความซับซ้อน',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
-                              ),
-                              subtitle: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                    child: RatingBar(
-                                      initialRating: 0,
-                                      minRating: 1,
-                                      direction: Axis.horizontal,
-                                      allowHalfRating: true,
-                                      itemCount: 5,
-                                      itemPadding:
-                                          EdgeInsets.symmetric(horizontal: 4.0),
-                                      itemBuilder: (context, _) => Icon(
-                                        Icons.star,
-                                        color: Colors.amber,
-                                      ),
-                                      unratedColor: Colors.grey[300],
-                                      onRatingUpdate: (rating) {
-                                        print(rating);
-                                        point[1] = rating;
-                                        ratingTrue = rating;
-                                      },
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
+                Column(
+                  children: [
+                    Card(
+                      child: ListTile(
+                        title: Text(
+                          'แอปพลิเคชั่นใช้งานง่าย สะดวก ไม่มีความซับซ้อน',
+                          style: TextStyle(
+                            fontSize: 20,
                           ),
-                          Card(
-                            child: ListTile(
-                              title: Text(
-                                'ผู้ใช้สามารถเข้าถึงข้อมูลภายในแอปพลิเคชัน ได้อย่างรวดเร็ว',
-                                style: TextStyle(
-                                  fontSize: 20,
+                        ),
+                        subtitle: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                              child: RatingBar(
+                                initialRating: 0,
+                                minRating: 1,
+                                direction: Axis.horizontal,
+                                allowHalfRating: true,
+                                itemCount: 5,
+                                itemBuilder: (context, _) => Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
                                 ),
+                                unratedColor: Colors.grey[300],
+                                onRatingUpdate: (rating) {
+                                  print(rating);
+                                  point[1] = rating;
+                                  ratingTrue = rating;
+                                },
                               ),
-                              subtitle: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                    child: RatingBar(
-                                      initialRating: 0,
-                                      minRating: 1,
-                                      direction: Axis.horizontal,
-                                      allowHalfRating: true,
-                                      itemCount: 5,
-                                      itemPadding:
-                                          EdgeInsets.symmetric(horizontal: 4.0),
-                                      itemBuilder: (context, _) => Icon(
-                                        Icons.star,
-                                        color: Colors.amber,
-                                      ),
-                                      unratedColor: Colors.grey[300],
-                                      onRatingUpdate: (rating) {
-                                        print(rating);
-                                        point[2] = rating;
-                                        ratingTrue = rating;
-                                      },
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                          Card(
-                            child: ListTile(
-                              title: Text(
-                                'หมวดหมู่ต่างๆ ภายในแอปพลิเคชันมีความเหมาะสม',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
-                              ),
-                              subtitle: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                    child: RatingBar(
-                                      initialRating: 0,
-                                      minRating: 1,
-                                      direction: Axis.horizontal,
-                                      allowHalfRating: true,
-                                      itemCount: 5,
-                                      itemPadding:
-                                          EdgeInsets.symmetric(horizontal: 4.0),
-                                      itemBuilder: (context, _) => Icon(
-                                        Icons.star,
-                                        color: Colors.amber,
-                                      ),
-                                      unratedColor: Colors.grey[300],
-                                      onRatingUpdate: (rating) {
-                                        print(rating);
-                                        point[3] = rating;
-                                        ratingTrue = rating;
-                                      },
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                          Card(
-                            child: ListTile(
-                              title: Text(
-                                'ความถูกต้องของเวลาที่รถจะมาถึง',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
-                              ),
-                              subtitle: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                    child: RatingBar(
-                                      initialRating: 0,
-                                      minRating: 1,
-                                      direction: Axis.horizontal,
-                                      allowHalfRating: true,
-                                      itemCount: 5,
-                                      itemPadding:
-                                          EdgeInsets.symmetric(horizontal: 4.0),
-                                      itemBuilder: (context, _) => Icon(
-                                        Icons.star,
-                                        color: Colors.amber,
-                                      ),
-                                      unratedColor: Colors.grey[300],
-                                      onRatingUpdate: (rating) {
-                                        print(rating);
-                                        point[4] = rating;
-                                        ratingTrue = rating;
-                                      },
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                          Card(
-                            child: ListTile(
-                              title: Text(
-                                'ช่วยบริหารเวลาระหว่างรอรถได้มากขึ้น',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
-                              ),
-                              subtitle: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                    child: RatingBar(
-                                      initialRating: 0,
-                                      minRating: 1,
-                                      direction: Axis.horizontal,
-                                      allowHalfRating: true,
-                                      itemCount: 5,
-                                      itemPadding:
-                                          EdgeInsets.symmetric(horizontal: 4.0),
-                                      itemBuilder: (context, _) => Icon(
-                                        Icons.star,
-                                        color: Colors.amber,
-                                      ),
-                                      unratedColor: Colors.grey[300],
-                                      onRatingUpdate: (rating) {
-                                        print(rating);
-                                        point[5] = rating;
-                                        ratingTrue = rating;
-                                      },
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
+                            )
+                          ],
+                        ),
                       ),
+                    ),
+                    Card(
+                      child: ListTile(
+                        title: Text(
+                          'ผู้ใช้สามารถเข้าถึงข้อมูลภายในแอปพลิเคชัน ได้อย่างรวดเร็ว',
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                        subtitle: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                              child: RatingBar(
+                                initialRating: 0,
+                                minRating: 1,
+                                direction: Axis.horizontal,
+                                allowHalfRating: true,
+                                itemCount: 5,
+                                itemBuilder: (context, _) => Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
+                                ),
+                                unratedColor: Colors.grey[300],
+                                onRatingUpdate: (rating) {
+                                  print(rating);
+                                  point[2] = rating;
+                                  ratingTrue = rating;
+                                },
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Card(
+                      child: ListTile(
+                        title: Text(
+                          'หมวดหมู่ต่างๆ ภายในแอปพลิเคชันมีความเหมาะสม',
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                        subtitle: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                              child: RatingBar(
+                                initialRating: 0,
+                                minRating: 1,
+                                direction: Axis.horizontal,
+                                allowHalfRating: true,
+                                itemCount: 5,
+                                itemBuilder: (context, _) => Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
+                                ),
+                                unratedColor: Colors.grey[300],
+                                onRatingUpdate: (rating) {
+                                  print(rating);
+                                  point[3] = rating;
+                                  ratingTrue = rating;
+                                },
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Card(
+                      child: ListTile(
+                        title: Text(
+                          'ความถูกต้องของเวลาที่รถจะมาถึง',
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                        subtitle: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                              child: RatingBar(
+                                initialRating: 0,
+                                minRating: 1,
+                                direction: Axis.horizontal,
+                                allowHalfRating: true,
+                                itemCount: 5,
+                                itemBuilder: (context, _) => Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
+                                ),
+                                unratedColor: Colors.grey[300],
+                                onRatingUpdate: (rating) {
+                                  print(rating);
+                                  point[4] = rating;
+                                  ratingTrue = rating;
+                                },
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Card(
+                      child: ListTile(
+                        title: Text(
+                          'ช่วยบริหารเวลาระหว่างรอรถได้มากขึ้น',
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                        subtitle: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                              child: RatingBar(
+                                initialRating: 0,
+                                minRating: 1,
+                                direction: Axis.horizontal,
+                                allowHalfRating: true,
+                                itemCount: 5,
+                                itemBuilder: (context, _) => Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
+                                ),
+                                unratedColor: Colors.grey[300],
+                                onRatingUpdate: (rating) {
+                                  print(rating);
+                                  point[5] = rating;
+                                  ratingTrue = rating;
+                                },
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 Container(
                   height: 30,
                 ),

@@ -135,12 +135,12 @@ class _CommentPageState extends State<CommentPage> {
                                 style: TextStyle(fontSize: 22),
                               ),
                               AnimatedContainer(
-                                duration: Duration(milliseconds: 400),
+                                duration: Duration(milliseconds: 200),
                                 width: _folded ? 56 : 200,
                                 height: 56,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(32),
-                                  color: Colors.white,
+                                  color: Colors.grey[100],
                                   boxShadow: kElevationToShadow[5],
                                 ),
                                 child: Row(
@@ -151,11 +151,15 @@ class _CommentPageState extends State<CommentPage> {
                                         child: !_folded
                                             ? TextField(
                                                 decoration: InputDecoration(
-                                                    hintText: 'Search',
-                                                    hintStyle: TextStyle(
-                                                        color:
-                                                            Colors.yellow[700]),
-                                                    border: InputBorder.none),
+                                                  hintText: 'ค้นหารีวิว',
+                                                  hintStyle: TextStyle(
+                                                      color: Colors.grey[700]),
+                                                  border: InputBorder.none,
+                                                ),
+                                                onChanged: (value) {
+                                                  filterSearchResults(value);
+                                                },
+                                                controller: editcontroller,
                                               )
                                             : null,
                                       ),
@@ -163,6 +167,7 @@ class _CommentPageState extends State<CommentPage> {
                                     AnimatedContainer(
                                       duration: Duration(milliseconds: 400),
                                       child: Material(
+                                        color: Colors.grey,
                                         type: MaterialType.transparency,
                                         child: InkWell(
                                           borderRadius: BorderRadius.only(
@@ -179,12 +184,13 @@ class _CommentPageState extends State<CommentPage> {
                                               _folded
                                                   ? Icons.search
                                                   : Icons.close,
-                                              color: Colors.yellow[700],
+                                              color: Colors.grey[700],
                                             ),
                                           ),
                                           onTap: () {
                                             setState(() {
                                               _folded = !_folded;
+                                              filterSearchResults('');
                                             });
                                           },
                                         ),
