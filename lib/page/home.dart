@@ -170,7 +170,6 @@ class _HomePageState extends State<HomePage>
               width: 25,
             ),
             onTap: () {
-              Navigator.of(context).pop();
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -223,7 +222,6 @@ class _HomePageState extends State<HomePage>
               width: 25,
             ),
             onTap: () {
-              Navigator.of(context).pop();
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -242,7 +240,6 @@ class _HomePageState extends State<HomePage>
               width: 25,
             ),
             onTap: () {
-              Navigator.of(context).pop();
               Navigator.push(
                 context,
                 MaterialPageRoute(

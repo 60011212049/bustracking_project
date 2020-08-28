@@ -365,7 +365,7 @@ class DetailState extends State<Detail> {
                                       child: Image.network(
                                         'http://' +
                                             Service.ip +
-                                            '/controlModel/showImage.php?name=' +
+                                            '/controlModel/images/member/' +
                                             busstop[id].sImage,
                                         fit: BoxFit.fitWidth,
                                       ),
