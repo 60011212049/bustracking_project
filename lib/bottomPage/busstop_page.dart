@@ -425,7 +425,14 @@ class DetailState extends State<Detail> {
                                                       .toString() +
                                                   ' นาที'),
                                             )
-                                          : DataCell(textRow('')),
+                                          : DataCell(
+                                              Container(
+                                                height: 20,
+                                                width: 20,
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              ),
+                                            ),
                                       DataCell(
                                         IconButton(
                                           icon: Icon(Icons.notifications),

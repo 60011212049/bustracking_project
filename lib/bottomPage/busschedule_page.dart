@@ -18,6 +18,7 @@ class _BusScheduleState extends State<BusSchedule> {
   TextEditingController editcontroller = TextEditingController();
   bool _isloading = false;
   List<DataRow> rowlist;
+  TimeOfDay timeOfDay;
   int i = 0;
   @override
   void initState() {
@@ -29,8 +30,13 @@ class _BusScheduleState extends State<BusSchedule> {
   Future getDataBusSchedule() async {
     busScheduleForSearch.clear();
     var status = {};
-    status['status'] = 'show';
+    status['status'] = 'showTimeNow';
     status['id'] = '';
+    status['timeNow'] = TimeOfDay.now().hour.toString() +
+        ':' +
+        TimeOfDay.now().minute.toString() +
+        ':00';
+    print(TimeOfDay.now());
     String jsonSt = json.encode(status);
     var response = await http.post(
         'http://' + Service.ip + '/controlModel/busschedule_model.php',
@@ -111,27 +117,12 @@ class _BusScheduleState extends State<BusSchedule> {
                     sortAscending: true,
                     sortColumnIndex: 0,
                     columns: [
-                      DataColumn(
-                        label: textColumn('รอบที่'),
-                      ),
                       DataColumn(label: textColumn('เวลา')),
                       DataColumn(label: textColumn('รถราง')),
                     ],
                     rows: [
                       DataRow(
                         cells: [
-                          DataCell(
-                            Container(
-                              width: 50,
-                              child: Text(
-                                '',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontFamily: 'Quark',
-                                ),
-                              ),
-                            ),
-                          ),
                           DataCell(
                             Container(
                               width: 80,
@@ -194,13 +185,7 @@ class _BusScheduleState extends State<BusSchedule> {
                         columns: [
                           DataColumn(
                             label: Container(
-                              width: 50,
-                              child: textColumn('รอบที่'),
-                            ),
-                          ),
-                          DataColumn(
-                            label: Container(
-                              width: 80,
+                              width: 150,
                               child: textColumn('เวลา'),
                             ),
                           ),
@@ -216,19 +201,6 @@ class _BusScheduleState extends State<BusSchedule> {
                                   cells: [
                                     DataCell(
                                       Container(
-                                        width: 50,
-                                        child: Text(
-                                          countRount().toString(),
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontFamily: 'Quark',
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    DataCell(
-                                      Container(
-                                        width: 80,
                                         child: Text(
                                           data.tcTime,
                                           style: TextStyle(
@@ -240,7 +212,6 @@ class _BusScheduleState extends State<BusSchedule> {
                                     ),
                                     DataCell(
                                       Container(
-                                        width: 150,
                                         child: Text(
                                           data.cid,
                                           style: TextStyle(

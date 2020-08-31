@@ -25,22 +25,22 @@ class NetworkHelper {
     double lat2, lon2;
     String str = '';
     print('object : $idPos');
-    print('Start is true $idPos >> ' +
-        startLat.toString() +
-        ' ' +
-        startLng.toString() +
-        ' ' +
-        lat2.toString() +
-        ' ' +
-        lon2.toString());
-    print('End is true $idPos >> ' +
-        endLat.toString() +
-        ' ' +
-        endLng.toString() +
-        ' ' +
-        lat2.toString() +
-        ' ' +
-        lon2.toString());
+    // print('Start is true $idPos >> ' +
+    //     startLat.toString() +
+    //     ' ' +
+    //     startLng.toString() +
+    //     ' ' +
+    //     lat2.toString() +
+    //     ' ' +
+    //     lon2.toString());
+    // print('End is true $idPos >> ' +
+    //     endLat.toString() +
+    //     ' ' +
+    //     endLng.toString() +
+    //     ' ' +
+    //     lat2.toString() +
+    //     ' ' +
+    //     lon2.toString());
     for (var i = 0; i <= 19;) {
       lat2 = double.parse(busstop[i].sLongitude);
       lon2 = double.parse(busstop[i].sLatitude);
@@ -72,13 +72,14 @@ class NetworkHelper {
     // '{"coordinates":[[$startLng,$startLat],[103.246851,16.246536],[103.247516,16.250286],[103.246497,16.249822],[103.247495,16.249122],[103.248825,16.248215],[103.250391,16.248524],[103.250037,16.247278],[103.245864,16.247082],[103.249018,16.245074],[103.251443,16.243405],[103.252923,16.244136],[103.25214,16.246032],[103.253578,16.24768],[103.252269,16.249709],[103.249276,16.249997],[103.246894,16.249431],[103.247795,16.250811],[$endLng,$endLat]]}';
     print(jsonSt);
     http.Response response = await http.post(
-        'https://api.openrouteservice.org/v2/directions/driving-hgv',
+        'https://api.openrouteservice.org/v2/directions/driving-car',
         body: jsonSt,
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
           HttpHeaders.authorizationHeader: apiKey
         });
     if (response.statusCode == 200) {
+      print(response.body);
       String data = response.body;
       return jsonDecode(data);
     } else {
@@ -89,7 +90,7 @@ class NetworkHelper {
   Future getDataStartStop(
       String latStart, String lngStart, String latStop, String lngStop) async {
     http.Response response = await http.get(
-      'https://api.openrouteservice.org/v2/directions/driving-hgv?api_key=5b3ce3597851110001cf624866aa9f3bf2e44721a476d06be0c6550f&start=$lngStart,$latStart&end=$lngStop,$latStop',
+      'https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf624866aa9f3bf2e44721a476d06be0c6550f&start=$lngStart,$latStart&end=$lngStop,$latStop',
     );
     if (response.statusCode == 200) {
       String data = response.body;
