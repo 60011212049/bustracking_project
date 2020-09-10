@@ -115,7 +115,10 @@ class _AssessmentFormPageState extends State<AssessmentFormPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('แบบประเมินแอปพลิเคชัน'),
+        title: Text(
+          'แบบประเมินแอปพลิเคชัน',
+          textScaleFactor: 1.2,
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(

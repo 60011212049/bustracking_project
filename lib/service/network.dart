@@ -89,6 +89,8 @@ class NetworkHelper {
 
   Future getDataStartStop(
       String latStart, String lngStart, String latStop, String lngStop) async {
+    print(
+        'https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf624866aa9f3bf2e44721a476d06be0c6550f&start=$lngStart,$latStart&end=$lngStop,$latStop');
     http.Response response = await http.get(
       'https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf624866aa9f3bf2e44721a476d06be0c6550f&start=$lngStart,$latStart&end=$lngStop,$latStop',
     );

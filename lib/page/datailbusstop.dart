@@ -74,8 +74,13 @@ class DetailState extends State<DetailBus> {
   sendNotification(int id, String bus, int time, String sName) async {
     TimeOfDay timeOfDay = TimeOfDay.now();
     var now = new DateTime.now();
-    var notificationTime = new DateTime(now.year, now.month, now.day,
-        timeOfDay.hour, timeOfDay.minute + time - 1);
+    var notificationTime = new DateTime(
+      now.year,
+      now.month,
+      now.day,
+      timeOfDay.hour,
+      timeOfDay.minute + time,
+    );
     var androidPlatformChannelSpecifics = AndroidNotificationDetails('10000',
         'FLUTTER_NOTIFICATION_CHANNEL', 'FLUTTER_NOTIFICATION_CHANNEL_DETAIL',
         importance: Importance.Max, priority: Priority.High);
@@ -151,12 +156,22 @@ class DetailState extends State<DetailBus> {
                     .ceil())
                 .toInt() %
             60);
+        if (modBus < 60) {
+          modBus = modBus.truncate().toInt();
+        } else {
+          modBus = (modBus.toInt() % 60);
+        }
         var mod = ((double.parse(data1['features'][0]['properties']['segments']
                             [0]['steps'][0]['duration']
                         .toString())
                     .ceil())
                 .toInt() %
             60);
+        if (mod < 60) {
+          mod = mod.truncate().toInt();
+        } else {
+          mod = (mod.toInt() % 60);
+        }
         DurationCal obj = DurationCal(
             (double.parse(data1['features'][0]['properties']['segments'][0]
                         ['steps'][0]['duration']
@@ -174,6 +189,7 @@ class DetailState extends State<DetailBus> {
       }
       //* no busstop one *//
       else {
+        var mod;
         var data = await network.getData(busstop, id, busPos, i);
         var wayBus = await network.getDataStartStop(
             lat2, long2, bus.latitude, bus.longitude);
@@ -183,7 +199,12 @@ class DetailState extends State<DetailBus> {
         double sumDuration = data['routes'][0]['summary']['duration'] -
             wayBus['features'][0]['properties']['segments'][0]['steps'][0]
                 ['duration'];
-        var mod = (sumDuration.toInt() % 60);
+        if (sumDuration < 60) {
+          mod = sumDuration.truncate().toInt();
+        } else {
+          mod = (sumDuration.toInt() % 60);
+        }
+
         DurationCal obj = DurationCal((sumDuration / 60), i, mod);
         listDuration.add(obj);
         if (listDuration.length == busPos.length) {

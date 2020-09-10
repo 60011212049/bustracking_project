@@ -12,7 +12,10 @@ class _ContactState extends State<Contact> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ติดต่อเรา'),
+        title: Text(
+          'ติดต่อเรา',
+          textScaleFactor: 1.2,
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(

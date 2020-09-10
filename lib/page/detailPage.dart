@@ -77,8 +77,8 @@ class DetailState extends State<Detail> {
   sendNotification(int id, String bus, int time, String sName) async {
     TimeOfDay timeOfDay = TimeOfDay.now();
     var now = new DateTime.now();
-    var notificationTime = new DateTime(now.year, now.month, now.day,
-        timeOfDay.hour, timeOfDay.minute + time - 1);
+    var notificationTime = new DateTime(
+        now.year, now.month, now.day, timeOfDay.hour, timeOfDay.minute + time);
     var androidPlatformChannelSpecifics = AndroidNotificationDetails('10000',
         'FLUTTER_NOTIFICATION_CHANNEL', 'FLUTTER_NOTIFICATION_CHANNEL_DETAIL',
         importance: Importance.Max, priority: Priority.High);
@@ -91,7 +91,7 @@ class DetailState extends State<Detail> {
     await flutterLocalNotificationsPlugin.schedule(
         1,
         'รถราง $bus ใกล้มาถึงแล้ว !',
-        'จะมาถึงในอีก 1 นาทีที่$sName',
+        'อีก 1 นาทีจะมาถึงที่$sName',
         notificationTime,
         platformChannelSpecifics);
   }

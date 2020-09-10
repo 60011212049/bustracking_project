@@ -12,8 +12,8 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="bustracking_project"
-        android:icon="@mipmap/ic_launcher">
+        android:label="MSU Bus GPS Tracking"
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

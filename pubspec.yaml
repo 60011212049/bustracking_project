@@ -42,11 +42,18 @@ dependencies:
   intl: ^0.16.1
   flutter_screenutil: ^2.3.0
   shared_preferences: ^0.5.8
+  flutter_launcher_icons: 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+    
+flutter_icons:
+  ios: true
+  android: "launcher_icon"
+  image_path_ios: "asset/icons/iconapp2.png"
+  image_path_android: "asset/icons/iconapp2.png"
+  adaptive_icon_background: "asset/icons/background.png" 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
